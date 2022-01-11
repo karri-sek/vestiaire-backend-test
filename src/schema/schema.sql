@@ -1,23 +1,34 @@
-create table task
+create table item
 (
 id int generated always as identity primary key,
-title text,
+item_name text,
 updated_at timestamptz default current_timestamp,
-description text
+price_currency text,
+price_amount integer
 );
 
-create table tasklist
+create table sold_item
 (
 id int generated always as identity primary key,
-title text,
+item_id text,
+no_of_items integer,
+seller_reference text,
 updated_at timestamptz default current_timestamp
 );
 
-create table task_tasklist
+create table seller
 (
-task_id int not null,
-tasklist_id int not null,
-primary key(task_id, tasklist_id),
-foreign key(task_id) references task (id) on delete cascade,
-foreign key(tasklist_id) references tasklist(id) on delete cascade
+id int generated always as identity primary key,
+seller_reference text,
+seller_location text,
+updated_at timestamptz default current_timestamp
+);
+
+create table payout
+(
+id int generated always as identity primary key,
+seller_reference text,
+amount integer,
+currency text,
+updated_at timestamptz default current_timestamp
 );

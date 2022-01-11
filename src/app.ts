@@ -1,12 +1,11 @@
 import express from 'express';
 import serverless from 'serverless-http';
-import taskRoute from './routes/task/taskRoute';
-import taskListRoute from './routes/taskList/taskListRoute';
+import itemRoute from './routes/item/itemRoute';
+import soldItemRoute from './routes/soldItem/soldItemRoute';
 
 const app = express();
 app.use(express.json());
-app.use('/tasks', taskRoute);
-app.use('/task-lists', taskListRoute);
-
+app.use('/items', itemRoute);
+app.use('/sold-items', soldItemRoute);
 export { app };
 export const handler = serverless(app);
