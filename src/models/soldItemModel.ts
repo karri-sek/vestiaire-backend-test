@@ -1,3 +1,5 @@
+import { ItemEntity } from './itemModel';
+
 type Timestamp = string;
 
 export type SoldItemEntity = {
@@ -9,7 +11,7 @@ export type SoldItemEntity = {
 };
 
 export type AddSoldItemPayload = {
-  item_id: string;
+  item_name: string;
   no_of_items: number;
   seller_reference: string;
 };
@@ -19,4 +21,9 @@ export type UpdateSoldItemPayload = {
   item_id: string;
   no_of_items: string;
   seller_reference: string;
+};
+
+export type SoldItemsType = {
+  item: ItemEntity;
+  totalAmount: number;
 };

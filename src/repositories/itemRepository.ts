@@ -14,10 +14,10 @@ export const getAllItemsFromDB = async () => {
   return itemEntities;
 };
 
-export const getItemFromDB = async (id: number) => {
+export const getItemFromDB = async (item_name: string) => {
   const {
     rows: [itemEntity]
-  } = await pool.query<ItemEntity>('SELECT * FROM item WHERE id = $1', [id]);
+  } = await pool.query<ItemEntity>('SELECT * FROM item WHERE item_name = $1', [item_name]);
   return itemEntity;
 };
 

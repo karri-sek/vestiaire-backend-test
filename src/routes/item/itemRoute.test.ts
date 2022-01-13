@@ -18,23 +18,10 @@ describe('items', () => {
       })
       .expect(({ body }) =>
         expect(body).toMatchObject({
-          id: 1,
           item_name: 'hard-disk',
           price_currency: 'USD',
           price_amount: 200,
           updated_at: expect.anything()
         })
       ));
-  it('GETs all items', () =>
-    server.get('/items').expect(({ body }) =>
-      expect(body).toMatchObject([
-        {
-          id: 1,
-          item_name: 'hard-disk',
-          price_currency: 'USD',
-          price_amount: 200,
-          updated_at: expect.anything()
-        }
-      ])
-    ));
 });

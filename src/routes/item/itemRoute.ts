@@ -13,10 +13,10 @@ itemRoute.get('/', async (req: Request, res: Response, next) => {
   }
 });
 
-itemRoute.get('/:id', async (req: Request, res: Response, next) => {
-  const { id } = req.params;
+itemRoute.get('/:item_name', async (req: Request, res: Response, next) => {
+  const { item_name } = req.params;
   try {
-    const result = await itemService.getItem(parseInt(id));
+    const result = await itemService.getItem(item_name);
     return res.status(200).json(result);
   } catch (e) {
     next(e);

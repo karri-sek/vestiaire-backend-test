@@ -11,7 +11,7 @@ import { AddItemPayload, UpdateItemPayload } from '../../models/itemModel';
 
 export const getAllItems = async () => await getAllItemsFromDB();
 
-export const getItem = async (id: number) => await getItemFromDB(id);
+export const getItem = async (item_name: string) => await getItemFromDB(item_name);
 
 export const addItem = async (addItemRequest: AddItemPayload) =>
   await addItemToDB(addItemRequest);

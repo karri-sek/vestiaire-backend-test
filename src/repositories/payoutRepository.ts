@@ -3,9 +3,6 @@ import { AddPayoutPayload, PayoutEntity } from '../models/payoutModel';
 
 export const pool = new Pool();
 
-export const getAllPayoutsFromDB = async () =>
-  await pool.query<PayoutEntity>('SELECT * FROM payout');
-
 export const getPayoutFromDB = async (id: number) => {
   const {
     rows: [entity]
@@ -16,7 +13,7 @@ export const getPayoutFromDB = async (id: number) => {
   return entity;
 };
 
-export const getAllPayoutItems = async () => {
+export const getAllPayouts = async () => {
   const { rows: payoutEntities } = await pool.query<PayoutEntity>(
     'SELECT * FROM payout'
   );

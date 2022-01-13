@@ -24,16 +24,16 @@ export const getSoldItemFromDB = async (id: number) => {
   return soldItemEntity;
 };
 
-export const addListOfSoldItems = async (soldItems: [AddSoldItemPayload]) => {
+export const addListOfSoldItems = async (soldItems: AddSoldItemPayload[]) => {
   const rows = [];
-  console.log(' soldItems ',soldItems)
-  for(const element of soldItems){
+  console.log(' soldItems ', soldItems);
+  for (const element of soldItems) {
     const r = await pool.query<SoldItemEntity>(
-      `insert into sold_item(item_id, no_of_items, seller_reference) values($1, $2, $3) returning *`,
-      [element.item_id, element.no_of_items, element.seller_reference]
+      `insert into sold_item(item_name, no_of_items, seller_reference) values($1, $2, $3) returning *`,
+      [element.item_name, element.no_of_items, element.seller_reference]
     );
     rows.push(r);
-  };
+  }
 
   return rows;
 };

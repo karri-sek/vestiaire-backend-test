@@ -16,7 +16,7 @@ itemRoute.get('/', async (req: Request, res: Response, next) => {
 itemRoute.get('/:id', async (req: Request, res: Response, next) => {
   const { id } = req.params;
   try {
-    const result = await soldItemService.getItem(parseInt(id));
+    const result = await soldItemService.getSoldItem(parseInt(id));
     return res.status(200).json(result);
   } catch (e) {
     next(e);
