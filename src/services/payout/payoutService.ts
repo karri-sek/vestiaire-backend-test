@@ -47,7 +47,7 @@ const getSplitsAndLeftOver = (itemsArray: SoldItemsType[]) => {
   };
 };
 
-const handleSplitAmount = async (amount: number, sellerReference: string, currency: string) => {
+const handleSplitAmount = async (amount: number, sellerReference: string, currency: string):Promise<AddPayoutPayload[]> => {
   if(amount<=0) return;
   const payoutItem: AddPayoutPayload = {
     seller_reference: sellerReference,

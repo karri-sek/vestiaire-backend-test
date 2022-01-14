@@ -45,8 +45,53 @@ describe('soldItemsService', () => {
       }
     ]);
     const result = await calculatePayouts(soldItemsMap);
-    console.log(' result ', result);
-
     expect(result.length).toBe(23);
   });
+
+  it('multiple items with multiple sellers should return multiple payouts', async () => {
+    const soldItemsMap = new Map();
+    soldItemsMap.set('ebay', [
+      {
+        item: {
+          id: 1,
+          item_name: 'mac-pro',
+          price_currency: 'USD',
+          price_amount: 1900
+        },
+        totalAmount: 9500
+      },
+      {
+        item: {
+          id: 9,
+          item_name: 'digicam',
+          price_currency: 'USD',
+          price_amount: 900
+        },
+        totalAmount: 13500
+      }
+    ]);
+    soldItemsMap.set('amazon', [
+        {
+          item: {
+            id: 1,
+            item_name: 'mac-pro',
+            price_currency: 'USD',
+            price_amount: 1900
+          },
+          totalAmount: 9500
+        },
+        {
+          item: {
+            id: 9,
+            item_name: 'digicam',
+            price_currency: 'USD',
+            price_amount: 900
+          },
+          totalAmount: 13500
+        }
+      ]);
+    const result = await calculatePayouts(soldItemsMap);
+    expect(result.length).toBe(46);
+  });
 });
+
