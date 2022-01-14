@@ -17,7 +17,9 @@ export const getAllItemsFromDB = async () => {
 export const getItemFromDB = async (item_name: string) => {
   const {
     rows: [itemEntity]
-  } = await pool.query<ItemEntity>('SELECT * FROM item WHERE item_name = $1', [item_name]);
+  } = await pool.query<ItemEntity>('SELECT * FROM item WHERE item_name = $1', [
+    item_name
+  ]);
   return itemEntity;
 };
 
