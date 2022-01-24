@@ -14,6 +14,13 @@ will start the server and end points at port 3000
 2) POST http://localhost:3000/sold-items
 payload: `[{"item_id": 4, "no_of_items": 5, "seller_reference": "ABC"}]`
 
+Schemas images:
+
+![alt text](https://github.com/karri-sek/vestiaire-backend-test/blob/master/Items.png?raw=true)
+![alt text](https://github.com/karri-sek/vestiaire-backend-test/blob/master/soldItemEntity.png?raw=true)
+![alt text](https://github.com/karri-sek/vestiaire-backend-test/blob/master/sellers.png?raw=true)
+![alt text](https://github.com/karri-sek/vestiaire-backend-test/blob/master/payouts.png?raw=true)
+
 I have added a nice frontend for this application and code base is at the repo:
 
 frontend repo: https://github.com/karri-sek/splitArray
