@@ -9,7 +9,6 @@ import {
 } from '../../repositories/soldItemRepository';
 
 import {mapSoldItemsToTheSeller} from '../soldItem/soldItemService';
-
 import { AddPayoutPayload } from '../../models/payoutModel';
 import { SoldItemsType } from '../../models/soldItemModel';
 import { PAYOUT_LIMIT } from '../../constants';
