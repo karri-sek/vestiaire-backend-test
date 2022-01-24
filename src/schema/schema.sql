@@ -42,8 +42,7 @@ insert into item(item_name, price_currency, price_amount) VALUES ('LED-tv', 'USD
 insert into item(item_name, price_currency, price_amount) VALUES ('microwave', 'USD', 690);
 insert into item(item_name, price_currency, price_amount) VALUES ('e-scooter', 'USD', 700);
 insert into item(item_name, price_currency, price_amount) VALUES ('digicam', 'USD', 900);
-insert into item(item_name, price_currency, price_amount) VALUES ('ipad', 'USD', 800);
-
+insert into item(item_name, price_currency, price_amount) VALUES ('ipad', 'USD', 822);
 
 
 insert into seller(seller_reference, seller_location) VALUES ('Amazon', 'USA');
@@ -58,6 +57,7 @@ insert into seller(seller_reference, seller_location) VALUES ('buyers-buyers', '
 
 
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('mac-pro', 5,'Amazon');
+insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('iphone', 50,'Amazon');
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('iphone', 3,'ebay');
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('LED-tv', 4,'rs-sellers');
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('microwave', 10,'ecommerce-sellers');
@@ -66,3 +66,5 @@ insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('e-scoote
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('gimbel', 9,'prime-sellers');
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('desk-chair', 10,'click-collect-sellers');
 insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('ipad', 15,'buyers-buyers');
+insert into sold_item(item_name, no_of_items,seller_reference) VALUES ('iphone', 3,'buyers-buyers');
+

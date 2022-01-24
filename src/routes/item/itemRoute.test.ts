@@ -12,7 +12,7 @@ describe('items', () => {
     server
       .post('/items')
       .send({
-        item_name: 'hard-disk',
+        item_name: 'hard-disk66',
         price_currency: 'USD',
         price_amount: 200
       })

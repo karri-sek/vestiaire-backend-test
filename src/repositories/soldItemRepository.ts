@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import {
-  AddSoldItemPayload,
+  SoldItemPayload,
   SoldItemEntity,
   UpdateSoldItemPayload
 } from '../models/soldItemModel';
@@ -24,9 +24,8 @@ export const getSoldItemFromDB = async (id: number) => {
   return soldItemEntity;
 };
 
-export const addListOfSoldItems = async (soldItems: AddSoldItemPayload[]) => {
+export const addListOfSoldItems = async (soldItems: SoldItemPayload[]) => {
   const rows = [];
-  console.log(' soldItems ', soldItems);
   for (const element of soldItems) {
     const r = await pool.query<SoldItemEntity>(
       `insert into sold_item(item_name, no_of_items, seller_reference) values($1, $2, $3) returning *`,

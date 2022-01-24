@@ -1,1 +1,1 @@
-export const PAYOUT_LIMIT: number = 1000;
+export const PAYOUT_LIMIT: number = 8000;

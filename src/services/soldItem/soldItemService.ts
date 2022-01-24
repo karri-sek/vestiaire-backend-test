@@ -8,7 +8,7 @@ import {
 } from '../../repositories/soldItemRepository';
 
 import {
-  AddSoldItemPayload,
+  SoldItemPayload,
   UpdateSoldItemPayload,
   SoldItemsType
 } from '../../models/soldItemModel';
@@ -20,7 +20,7 @@ export const getAllItems = async () => await getAllISoldItemsFromDB();
 
 export const getSoldItem = async (id: number) => await getSoldItemFromDB(id);
 
-export const addSoldItems = async (soldItems: AddSoldItemPayload[]) => {
+export const addSoldItems = async (soldItems: SoldItemPayload[]) => {
   await addListOfSoldItems(soldItems);
   await mapSoldItemsToTheSeller(soldItems);
 };
@@ -33,10 +33,11 @@ export const deleteAllItems = async () => await deleteAllSoldItemsFromDB();
 export const deleteItem = async (id: number) => await deleteSoldItemFromDB(id);
 
 export const mapSoldItemsToTheSeller = async (
-  soldItems: AddSoldItemPayload[]
+  soldItems: SoldItemPayload[]
 ) => {
   const sellerReferenceMap = new Map<string, SoldItemsType[]>();
   for (let soldItem of soldItems) {
+    if(soldItem.item_name !== null){
     const item: ItemEntity = await getItem(soldItem.item_name);
     const totalAmount: number = item.price_amount * soldItem.no_of_items;
     if (sellerReferenceMap.get(soldItem.seller_reference)) {
@@ -49,5 +50,6 @@ export const mapSoldItemsToTheSeller = async (
       sellerReferenceMap.set(soldItem.seller_reference, itemsArray);
     }
   }
+}
   return sellerReferenceMap;
 };

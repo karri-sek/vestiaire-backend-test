@@ -1,14 +1,29 @@
 import {
   getPayoutFromDB,
-  getAllPayouts,
   addPayoutToDB,
   removePayoutFromDB
 } from '../../repositories/payoutRepository';
 
+import {
+  getAllISoldItemsFromDB
+} from '../../repositories/soldItemRepository';
+
+import {mapSoldItemsToTheSeller} from '../soldItem/soldItemService';
+
 import { AddPayoutPayload } from '../../models/payoutModel';
 import { SoldItemsType } from '../../models/soldItemModel';
 import { PAYOUT_LIMIT } from '../../constants';
-export const getAllItems = async () => await getAllPayouts();
+export const getAllItems = async () => {
+    const soldItems = await getAllISoldItemsFromDB();
+    const soldItemsMap = await mapSoldItemsToTheSeller(soldItems);
+     const payouts = []
+    for (let soldItemKey of soldItemsMap.keys()) {
+    const map = new Map();
+     map.set(soldItemKey,soldItemsMap.get(soldItemKey))
+       payouts.push(await calculatePayouts(map));
+    }
+    return payouts;
+}
 
 export const getItem = async (id: number) => await getPayoutFromDB(id);
 
@@ -47,7 +62,7 @@ const getSplitsAndLeftOver = (itemsArray: SoldItemsType[]) => {
   };
 };
 
-const handleSplitAmount = async (amount: number, sellerReference: string, currency: string):Promise<AddPayoutPayload[]> => {
+const handleSplitAmount = async (amount: number, sellerReference: string, currency: string):Promise<AddPayoutPayload> => {
   if(amount<=0) return;
   const payoutItem: AddPayoutPayload = {
     seller_reference: sellerReference,
@@ -55,7 +70,7 @@ const handleSplitAmount = async (amount: number, sellerReference: string, curren
     amount: amount
   };
   await addItem(payoutItem);
-  return [payoutItem];
+  return payoutItem;
 }
 
 const handleSoldItemsAmountLessThenSplit = async (itemsArray, sellerReference, currency, ) => {
@@ -79,6 +94,7 @@ export const calculatePayouts = async (sellersDetails) => {
       return handleSingleSoldItem(itemsArray, sellerReference);
     } else {
       let { totalAmount, totalSplits, currency } = getSplitsAndLeftOver(itemsArray);
+
       if (totalAmount > PAYOUT_LIMIT) {
         const leftOverSplitAmount: number = totalAmount % PAYOUT_LIMIT;
         while (totalSplits > 0) {
@@ -91,9 +107,12 @@ export const calculatePayouts = async (sellersDetails) => {
           await addItem(payoutItem);
           totalSplits--;
         }
-        handleSplitAmount(leftOverSplitAmount,sellerReference,currency);
+
+       result.push(await handleSplitAmount(leftOverSplitAmount,sellerReference,currency));
+       console.log(' result ',result)
+
       } else {
-        handleSoldItemsAmountLessThenSplit(itemsArray, sellerReference, currency);
+        result.push(handleSoldItemsAmountLessThenSplit(itemsArray, sellerReference, currency));
       }
     }
   }

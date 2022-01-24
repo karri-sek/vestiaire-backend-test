@@ -10,7 +10,7 @@ export type SoldItemEntity = {
   updated_at: Timestamp;
 };
 
-export type AddSoldItemPayload = {
+export type SoldItemPayload = {
   item_name: string;
   no_of_items: number;
   seller_reference: string;
